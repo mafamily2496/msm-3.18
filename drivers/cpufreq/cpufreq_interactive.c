@@ -445,8 +445,10 @@ static void __cpufreq_interactive_timer(unsigned long data, bool is_notif)
 	struct cpufreq_interactive_tunables *tunables =
 		ppol->policy->governor_data;
 	struct cpufreq_interactive_cpuinfo *pcpu;
-	unsigned int new_freq;
-	unsigned int loadadjfreq = 0, tmploadadjfreq;
+	unsigned int new_freq = 0;
+	unsigned int prev_laf = 0, t_prevlaf;
+	unsigned int pred_laf = 0, t_predlaf = 0;
+	unsigned int prev_chfreq, pred_chfreq, chosen_freq;
 	unsigned int index;
 	unsigned long flags;
 	unsigned long max_cpu;
